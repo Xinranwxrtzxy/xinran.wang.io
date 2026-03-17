@@ -1,638 +1,809 @@
-import React, { useState } from "react";
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Xinran Wang — UX Research Portfolio" />
+  <title>Xinran Wang — UX Research Portfolio</title>
 
-export default function XinranWangUXPortfolio() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --surface: #ffffff;
+      --surface-soft: #f2f5fb;
+      --text: #162033;
+      --muted: #617089;
+      --line: #dbe3ef;
+      --primary: #2f5cff;
+      --primary-dark: #2346c9;
+      --accent: #ecf2ff;
+      --shadow: 0 12px 30px rgba(20, 35, 70, 0.08);
+      --radius-xl: 28px;
+      --maxw: 1180px;
+    }
 
-  const navItems = [
-    { label: "About", href: "#about" },
-    { label: "Case Studies", href: "#work" },
-    { label: "Experience", href: "#experience" },
-    { label: "Contact", href: "#contact" },
-  ];
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f8faff 0%, #eef3fb 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--maxw), calc(100% - 32px)); margin: 0 auto; }
+    .page-shell { min-height: 100vh; background: linear-gradient(180deg, #f8faff 0%, #eef3fb 100%); }
 
-  const caseStudies = [
-    {
-      label: "Evaluation Research",
-      title: "Powered by School Food Professionals",
-      summary:
-        "Evaluated how campaign messages and creative treatments shaped perceptions of school food professionals through quasi-experimental thinking, grouped comparisons, regression-based interpretation, and outcome framing.",
-      problem:
-        "How do we assess whether campaign messaging meaningfully shifts perceptions of a professional group, beyond general impressions or anecdotal feedback?",
-      contribution:
-        "Supported the evaluation logic behind structured message testing and comparative analysis, helping translate campaign outcomes into stakeholder-relevant findings and recommendations.",
-      impact:
-        "This project demonstrates my ability to connect intervention design with rigorous evaluation and practical reporting for external stakeholders.",
-      tags: ["Quasi-Experimental Design", "Regression", "Campaign Impact", "Stakeholder Reporting"],
-      links: [
-        {
-          href: "https://www.chefannfoundation.org/blog/why-and-how-we-helped-california-build-a-campaign-to-shift-perceptions-about-school-food-professionals/",
-          text: "🔗 Project page",
-        },
-        {
-          href: "https://storage.googleapis.com/chefann-prod-v1/downloads/Elevating-the-Perceptions-of-School-Food-Professionals.pdf",
-          text: "📄 Report PDF",
-        },
-      ],
-    },
-    {
-      label: "Social Impact Research",
-      title: "LA84 Play Equity Research",
-      summary:
-        "Supported research design and insight development for a play equity study examining disparities in youth access to sports and recreation opportunities.",
-      problem:
-        "How do we turn a broad concern about inequitable access into a research framework that stakeholders can understand, communicate, and act on?",
-      contribution:
-        "Helped structure the research approach, connect stakeholder goals to evidence gathering, and frame insights in a way that supported advocacy and funding conversations.",
-      impact:
-        "This work reflects my ability to move from vague problem framing to applied insight generation in mission-driven settings.",
-      tags: ["Equity Research", "Applied Insights", "Stakeholder Communication", "Program Framing"],
-      links: [
-        { href: "https://www.la84.org/", text: "🔗 LA84 Foundation" },
-        { href: "https://la84.s3.amazonaws.com/report/2024_Play_Equity_Report.pdf", text: "📄 Report PDF" },
-      ],
-    },
-    {
-      label: "Qualitative Health Research",
-      title: "Listening to Californians with Complex Needs",
-      summary:
-        "Contributed to qualitative research exploring the lived experiences of Californians with complex health and social needs, including older adults, people with disabilities, people with chronic conditions, and caregivers.",
-      problem:
-        "How do we make sense of multiple stakeholder perspectives when experiences, needs, and priorities are complex and sometimes in tension?",
-      contribution:
-        "Supported qualitative synthesis across stakeholder groups and helped translate nuanced, sometimes conflicting experiences into clear insight themes for external audiences.",
-      impact:
-        "This project shows my comfort with ambiguity, sensitive topics, and layered qualitative interpretation.",
-      tags: ["Qualitative Research", "Healthcare", "Insight Synthesis", "Community Research"],
-      links: [
-        { href: "https://www.chcf.org/resource/listening-californians-complex-needs/", text: "🔗 Project overview" },
-        {
-          href: "https://www.chcf.org/resource/listening-to-californians-with-complex-needs-challenges-living-independently/",
-          text: "🔗 Example article",
-        },
-      ],
-    },
-    {
-      label: "AI + Research Methods",
-      title: "AI vs. Human Cognitive Interviewing Exploration",
-      summary:
-        "Explored how AI-conducted cognitive interviews compare with human interviews, focusing on response quality, probing depth, and evaluation frameworks grounded in cognitive interviewing methodology.",
-      problem:
-        "Can AI simulate or support cognitive interviewing in meaningful ways, and how should we evaluate what it does well or poorly compared with human interviewers?",
-      contribution:
-        "Applied methodological frameworks to compare AI-generated interviewing against human examples, with attention to probe quality, interpretive depth, and research validity.",
-      impact:
-        "This project represents my interest in the intersection of UX research, survey methodology, and emerging AI-enabled workflows.",
-      tags: ["AI Research", "Cognitive Interviewing", "Method Evaluation", "Survey Research"],
-      links: [
-        { href: "https://electionstudies.org/data-center/2006-pilot-study/", text: "🔗 ANES 2006 Pilot Study" },
-        {
-          href: "https://electionstudies.org/wp-content/uploads/2022/03/anes-pilot-2006-cognitive-transcripts.pdf",
-          text: "📄 Transcripts",
-        },
-      ],
-    },
-    {
-      label: "Survey Methodology",
-      title: "Matrix Sampling Simulation Study",
-      summary:
-        "Analyzed the application of matrix sampling in large-scale surveys by building simulation-based comparisons across questionnaire allocation and analysis strategies.",
-      problem:
-        "How can we reduce respondent burden while preserving acceptable levels of estimation quality and minimizing bias?",
-      contribution:
-        "Contributed to simulation design and comparative evaluation of design and analysis strategies, helping surface trade-offs among burden, precision, and data quality.",
-      impact:
-        "This project reflects my technical grounding in survey methods and my ability to explain methodological trade-offs to non-specialist audiences.",
-      tags: ["Simulation", "Matrix Sampling", "Data Quality", "Survey Methods"],
-      links: [{ href: "#contact", text: "🔗 Ask for slides or details" }],
-    },
-    {
-      label: "Cross-Cultural Research",
-      title: "Cross-Cultural & Multilingual Public Opinion Research",
-      summary:
-        "Led and supported research across multicultural audiences, including multilingual workflows involving Mandarin, Spanish, and Vietnamese materials.",
-      problem:
-        "How do we design research that remains coherent, culturally aware, and operationally feasible across languages, communities, and stakeholder needs?",
-      contribution:
-        "Worked across questionnaire development, translation coordination, sampling inputs, and reporting to support studies involving diverse communities and multilingual materials.",
-      impact:
-        "This body of work highlights my ability to operate in complex, cross-cultural research environments where nuance and execution both matter.",
-      tags: ["Multilingual Research", "Questionnaire Design", "Public Opinion", "Cross-Cultural"],
-      links: [{ href: "#contact", text: "🔗 Ask for selected examples" }],
-    },
-  ];
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(248, 250, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(219, 227, 239, 0.85);
+    }
+    .nav-container {
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .nav-logo { font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em; }
+    .nav-links { list-style: none; display: flex; align-items: center; gap: 26px; margin: 0; padding: 0; }
+    .nav-links a { color: var(--muted); font-size: 0.96rem; transition: color 0.2s ease; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
 
-  const experience = [
-    {
-      role: "Polling & Public Opinion Analyst",
-      company: "EVITARUS",
-      date: "2024 – Present",
-      bullets: [
-        "Led and supported 30+ mixed-methods research projects across public services, healthcare, communications, and audience insight, translating ambiguous client questions into research objectives, measurement frameworks, and actionable recommendations.",
-        "Designed and executed surveys, in-depth interviews, focus groups, cognitive interviews, and concept/message tests to understand user needs, perceptions, decision drivers, and barriers across diverse and multilingual audiences.",
-        "Built and programmed 50+ online studies in Qualtrics and SurveyMonkey using skip logic, quotas, randomization, multilingual survey flows, and quality-control checks to improve respondent experience and data reliability.",
-        "Synthesized findings into toplines, white papers, and stakeholder presentations, translating research evidence into recommendations for service design, communications strategy, and user engagement.",
-      ],
-    },
-    {
-      role: "Graduate Student Researcher / Survey Research Analyst",
-      company: "University of Michigan",
-      date: "2022 – 2024",
-      bullets: [
-        "Managed monthly processing and analysis of large-scale consumer survey data, supporting production workflows for studies with 7,000+ respondents using SQL and SAS for sampling, weighting, data cleaning, and quality control.",
-        "Applied raking, predictive mean matching, and multiple imputation to address missing data and sample bias, improving representativeness and stability of survey estimates.",
-        "Conducted simulation research on matrix sampling designs, comparing questionnaire allocation, weighting, and imputation strategies to evaluate tradeoffs among respondent burden, estimation precision, and statistical bias.",
-        "Analyzed consumer sentiment, inflation expectations, and behavioral indicators through time-series, longitudinal, and multivariate analysis, translating results into clear findings for research and non-technical audiences.",
-      ],
-    },
-    {
-      role: "Researcher Across Nonprofit, Foundation, and Applied Research Projects",
-      company: "Independent / Collaborative Research Experience",
-      date: "Selected Work",
-      bullets: [
-        "Worked on projects for mission-driven organisations and foundations, helping translate broad stakeholder goals into researchable questions and feasible study designs.",
-        "Applied comparative analysis, quasi-experimental thinking, and outcome interpretation to support evidence-based recommendations.",
-        "Delivered research outputs that helped clarify user and community needs, communicate inequities, and support funding or program positioning.",
-      ],
-    },
-  ];
+    .hero { padding: 56px 0 28px; min-height: calc(100vh - 72px); display: flex; align-items: center; }
+    .hero-grid {
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+    .hero-main, .hero-side {
+      background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(219, 227, 239, 0.95);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+    .hero-main { padding: 40px; }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .hero-name { margin: 0; font-size: clamp(2.5rem, 6vw, 4.7rem); line-height: 1.03; letter-spacing: -0.05em; }
+    .hero-title { margin: 16px 0 0; font-size: clamp(1.12rem, 2.4vw, 1.55rem); font-weight: 600; color: #2d3957; }
+    .hero-description { margin: 18px 0 0; color: var(--muted); font-size: 1.04rem; max-width: 730px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-secondary { background: white; color: var(--text); border-color: var(--line); }
 
-  return (
-    <div className="page-shell">
-      <style>{`
-        :root {
-          --bg: #f6f8fc;
-          --surface: #ffffff;
-          --surface-soft: #f2f5fb;
-          --text: #162033;
-          --muted: #617089;
-          --line: #dbe3ef;
-          --primary: #2f5cff;
-          --primary-dark: #2346c9;
-          --accent: #ecf2ff;
-          --shadow: 0 12px 30px rgba(20, 35, 70, 0.08);
-          --radius-xl: 28px;
-          --maxw: 1180px;
-        }
+    .hero-highlights { margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .highlight-card { background: var(--surface-soft); border: 1px solid #dbe5ff; border-radius: 18px; padding: 16px; }
+    .highlight-card strong { display: block; font-size: 1rem; margin-bottom: 6px; }
+    .highlight-card span { display: block; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
 
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { margin: 0; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: var(--text); background: linear-gradient(180deg, #f8faff 0%, #eef3fb 100%); line-height: 1.65; }
-        a { color: inherit; text-decoration: none; }
-        .container { width: min(var(--maxw), calc(100% - 32px)); margin: 0 auto; }
-        .page-shell { min-height: 100vh; background: linear-gradient(180deg, #f8faff 0%, #eef3fb 100%); }
+    .hero-side { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+    .headshot-card { background: linear-gradient(180deg, #f6f9ff 0%, #edf3ff 100%); border: 1px solid #d8e4ff; border-radius: 24px; padding: 18px; }
+    .headshot-wrap {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      border-radius: 22px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #dfe9ff 0%, #f3f7ff 100%);
+      border: 1px solid #d7e2ff;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+    .headshot-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .headshot-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #3d57cf;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      background: transparent;
+    }
+    .headshot-note { margin-top: 12px; color: var(--muted); font-size: 0.86rem; line-height: 1.5; }
 
-        .navbar {
-          position: sticky; top: 0; z-index: 1000; background: rgba(248, 250, 255, 0.9);
-          backdrop-filter: blur(10px); border-bottom: 1px solid rgba(219, 227, 239, 0.85);
-        }
-        .nav-container {
-          width: min(var(--maxw), calc(100% - 32px)); margin: 0 auto; min-height: 72px; display: flex;
-          align-items: center; justify-content: space-between; gap: 20px;
-        }
-        .nav-logo { font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em; }
-        .nav-links { list-style: none; display: flex; align-items: center; gap: 26px; margin: 0; padding: 0; }
-        .nav-links a { color: var(--muted); font-size: 0.96rem; transition: color 0.2s ease; }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-toggle {
-          display: none; border: 1px solid var(--line); background: var(--surface); border-radius: 10px;
-          padding: 8px 12px; font-size: 1.1rem; cursor: pointer;
-        }
+    .summary-panel { background: linear-gradient(135deg, #2f5cff 0%, #5d7cff 100%); border-radius: 24px; color: white; padding: 22px; }
+    .summary-panel small { display: inline-block; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.82; margin-bottom: 8px; }
+    .summary-panel h3 { margin: 0 0 8px; font-size: 1.38rem; line-height: 1.25; }
+    .summary-panel p { margin: 0; color: rgba(255,255,255,0.92); font-size: 0.95rem; }
 
-        .hero { padding: 56px 0 28px; min-height: calc(100vh - 72px); display: flex; align-items: center; }
-        .hero-grid {
-          width: min(var(--maxw), calc(100% - 32px)); margin: 0 auto; display: grid;
-          grid-template-columns: 1.08fr 0.92fr; gap: 26px; align-items: stretch;
-        }
-        .hero-main, .hero-side {
-          background: rgba(255,255,255,0.84); border: 1px solid rgba(219, 227, 239, 0.95);
-          border-radius: 30px; box-shadow: var(--shadow); backdrop-filter: blur(8px);
-        }
-        .hero-main { padding: 40px; }
-        .eyebrow { margin: 0 0 10px; color: var(--primary); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-        .hero-name { margin: 0; font-size: clamp(2.5rem, 6vw, 4.7rem); line-height: 1.03; letter-spacing: -0.05em; }
-        .hero-title { margin: 16px 0 0; font-size: clamp(1.12rem, 2.4vw, 1.55rem); font-weight: 600; color: #2d3957; }
-        .hero-description { margin: 18px 0 0; color: var(--muted); font-size: 1.04rem; max-width: 730px; }
-        .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
-        .btn {
-          display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 20px;
-          border-radius: 999px; font-weight: 600; border: 1px solid transparent;
-          transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
-        }
-        .btn:hover { transform: translateY(-1px); }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: var(--primary-dark); }
-        .btn-secondary { background: white; color: var(--text); border-color: var(--line); }
-        .hero-highlights { margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-        .highlight-card { background: var(--surface-soft); border: 1px solid #dbe5ff; border-radius: 18px; padding: 16px; }
-        .highlight-card strong { display: block; font-size: 1rem; margin-bottom: 6px; }
-        .highlight-card span { display: block; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+    .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .mini-item { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+    .mini-item h4 { margin: 0 0 6px; font-size: 0.98rem; }
+    .mini-item p { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
 
-        .hero-side { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
-        .headshot-card { background: linear-gradient(180deg, #f6f9ff 0%, #edf3ff 100%); border: 1px solid #d8e4ff; border-radius: 24px; padding: 18px; }
-        .headshot-wrap {
-          aspect-ratio: 1 / 1; width: 100%; border-radius: 22px; overflow: hidden;
-          background: linear-gradient(135deg, #dfe9ff 0%, #f3f7ff 100%); border: 1px solid #d7e2ff;
-          display: grid; place-items: center;
-        }
-        .headshot-wrap img { width: 100%; height: 100%; object-fit: cover; }
-        .headshot-fallback {
-          width: 100%; height: 100%; display: grid; place-items: center; color: #3d57cf;
-          font-size: 3rem; font-weight: 700; letter-spacing: -0.04em;
-        }
-        .headshot-note { margin-top: 12px; color: var(--muted); font-size: 0.86rem; line-height: 1.5; }
-        .summary-panel { background: linear-gradient(135deg, #2f5cff 0%, #5d7cff 100%); border-radius: 24px; color: white; padding: 22px; }
-        .summary-panel small { display: inline-block; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.82; margin-bottom: 8px; }
-        .summary-panel h3 { margin: 0 0 8px; font-size: 1.38rem; line-height: 1.25; }
-        .summary-panel p { margin: 0; color: rgba(255,255,255,0.92); font-size: 0.95rem; }
-        .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .mini-item { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
-        .mini-item h4 { margin: 0 0 6px; font-size: 0.98rem; }
-        .mini-item p { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
-        .hero-scroll { text-align: center; margin-top: 18px; }
-        .hero-scroll a {
-          display: inline-flex; width: 42px; height: 42px; align-items: center; justify-content: center;
-          border-radius: 999px; background: white; border: 1px solid var(--line); color: var(--primary); box-shadow: var(--shadow);
-        }
+    .hero-scroll { text-align: center; margin-top: 18px; }
+    .hero-scroll a {
+      display: inline-flex;
+      width: 42px; height: 42px;
+      align-items: center; justify-content: center;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--line);
+      color: var(--primary);
+      box-shadow: var(--shadow);
+    }
 
-        .section { padding: 86px 0; }
-        .section-title { margin: 0 0 16px; font-size: clamp(1.9rem, 3vw, 2.5rem); letter-spacing: -0.03em; }
-        .section-intro { max-width: 760px; margin: 0 0 34px; color: var(--muted); }
+    .section { padding: 86px 0; }
+    .section-title { margin: 0 0 16px; font-size: clamp(1.9rem, 3vw, 2.5rem); letter-spacing: -0.03em; }
+    .section-intro { max-width: 760px; margin: 0 0 34px; color: var(--muted); }
 
-        .about-grid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 22px; }
-        .about-card, .about-side-card, .case-card, .timeline-content, .contact-card, .contact-side {
-          background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow);
-        }
-        .about-card p, .about-side-card p { margin-top: 0; color: var(--muted); }
-        .skills h3, .about-side-card h3 { margin: 0 0 14px; font-size: 1.06rem; }
-        .skills-list, .focus-list {
-          list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px;
-        }
-        .skills-list li, .focus-list li {
-          padding: 10px 14px; border-radius: 999px; background: var(--accent); color: #2646c4;
-          border: 1px solid #d8e3ff; font-size: 0.92rem; font-weight: 600;
-        }
+    .about-grid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 22px; }
+    .about-card, .about-side-card, .case-card, .timeline-content, .contact-card, .contact-side {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .about-card p, .about-side-card p { margin-top: 0; color: var(--muted); }
+    .skills h3, .about-side-card h3 { margin: 0 0 14px; font-size: 1.06rem; }
+    .skills-list, .focus-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+    .skills-list li, .focus-list li {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #2646c4;
+      border: 1px solid #d8e3ff;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
 
-        .case-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
-        .case-card { display: flex; flex-direction: column; min-height: 100%; padding: 26px; }
-        .case-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
-        .case-label {
-          display: inline-flex; padding: 7px 11px; border-radius: 999px; background: #f3f7ff; border: 1px solid #dce5ff;
-          color: #3550d6; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-        }
-        .case-title { margin: 0; font-size: 1.22rem; line-height: 1.3; }
-        .case-summary { margin: 0 0 18px; color: var(--muted); font-size: 0.98rem; }
-        .case-block { margin-bottom: 16px; padding: 14px 16px; background: #fbfcff; border: 1px solid #e5ebf6; border-radius: 16px; }
-        .case-block h4 { margin: 0 0 8px; font-size: 0.95rem; }
-        .case-block p { margin: 0; color: var(--muted); font-size: 0.94rem; }
-        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-        .tag {
-          display: inline-flex; padding: 7px 11px; border-radius: 999px; background: #f4f7ff; border: 1px solid #dce5ff;
-          color: #3550d6; font-size: 0.82rem; font-weight: 600;
-        }
-        .case-links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 12px; }
-        .case-link { display: inline-flex; align-items: center; gap: 8px; color: var(--primary); font-weight: 600; font-size: 0.95rem; }
-        .case-link:hover { color: var(--primary-dark); }
+    .case-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .case-card { display: flex; flex-direction: column; min-height: 100%; padding: 26px; }
+    .case-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+    .case-label {
+      display: inline-flex; padding: 7px 11px; border-radius: 999px; background: #f3f7ff; border: 1px solid #dce5ff;
+      color: #3550d6; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .case-title { margin: 0; font-size: 1.22rem; line-height: 1.3; }
+    .case-summary { margin: 0 0 18px; color: var(--muted); font-size: 0.98rem; }
+    .case-block { margin-bottom: 16px; padding: 14px 16px; background: #fbfcff; border: 1px solid #e5ebf6; border-radius: 16px; }
+    .case-block h4 { margin: 0 0 8px; font-size: 0.95rem; }
+    .case-block p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .tag {
+      display: inline-flex; padding: 7px 11px; border-radius: 999px; background: #f4f7ff; border: 1px solid #dce5ff;
+      color: #3550d6; font-size: 0.82rem; font-weight: 600;
+    }
+    .case-links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 12px; }
+    .case-link { display: inline-flex; align-items: center; gap: 8px; color: var(--primary); font-weight: 600; font-size: 0.95rem; }
+    .case-link:hover { color: var(--primary-dark); }
 
-        .timeline { position: relative; display: grid; gap: 18px; }
-        .timeline::before {
-          content: ""; position: absolute; left: 15px; top: 4px; bottom: 4px; width: 2px;
-          background: linear-gradient(180deg, #cdd9ff 0%, #e7ecf6 100%);
-        }
-        .timeline-item { display: grid; grid-template-columns: 32px 1fr; gap: 18px; align-items: start; position: relative; }
-        .timeline-marker {
-          width: 14px; height: 14px; margin-top: 10px; margin-left: 9px; border-radius: 999px;
-          background: var(--primary); box-shadow: 0 0 0 4px #e8eeff; position: relative; z-index: 2;
-        }
-        .timeline-header { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: baseline; margin-bottom: 12px; }
-        .timeline-header h3 { margin: 0; font-size: 1.16rem; }
-        .timeline-company { color: var(--primary); font-weight: 700; }
-        .timeline-date { color: var(--muted); font-size: 0.95rem; }
-        .timeline-details { margin: 0; padding-left: 18px; color: var(--muted); }
-        .timeline-details li + li { margin-top: 8px; }
+    .timeline { position: relative; display: grid; gap: 18px; }
+    .timeline::before {
+      content: "";
+      position: absolute; left: 15px; top: 4px; bottom: 4px;
+      width: 2px;
+      background: linear-gradient(180deg, #cdd9ff 0%, #e7ecf6 100%);
+    }
+    .timeline-item { display: grid; grid-template-columns: 32px 1fr; gap: 18px; align-items: start; position: relative; }
+    .timeline-marker {
+      width: 14px; height: 14px; margin-top: 10px; margin-left: 9px; border-radius: 999px;
+      background: var(--primary); box-shadow: 0 0 0 4px #e8eeff; position: relative; z-index: 2;
+    }
+    .timeline-header { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: baseline; margin-bottom: 12px; }
+    .timeline-header h3 { margin: 0; font-size: 1.16rem; }
+    .timeline-company { color: var(--primary); font-weight: 700; }
+    .timeline-date { color: var(--muted); font-size: 0.95rem; }
+    .timeline-details { margin: 0; padding-left: 18px; color: var(--muted); }
+    .timeline-details li + li { margin-top: 8px; }
 
-        .contact-wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
-        .contact-description { margin: 0 0 20px; color: var(--muted); }
-        .contact-links { display: grid; gap: 12px; }
-        .contact-item {
-          display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px;
-          background: #fafbff; border: 1px solid var(--line); transition: transform .2s ease, border-color .2s ease;
-        }
-        .contact-item:hover { transform: translateY(-1px); border-color: #bfd0ff; }
-        .contact-icon {
-          width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px;
-          background: var(--accent); color: var(--primary); flex-shrink: 0;
-        }
-        .contact-side h3 { margin-top: 0; margin-bottom: 10px; }
-        .contact-side p { color: var(--muted); margin-top: 0; }
-        .availability-list { padding-left: 18px; margin: 0; color: var(--muted); }
-        .availability-list li + li { margin-top: 8px; }
+    .contact-wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
+    .contact-description { margin: 0 0 20px; color: var(--muted); }
+    .contact-links { display: grid; gap: 12px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px;
+      background: #fafbff; border: 1px solid var(--line);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .contact-item:hover { transform: translateY(-1px); border-color: #bfd0ff; }
+    .contact-icon {
+      width: 34px; height: 34px;
+      display: grid; place-items: center;
+      border-radius: 10px;
+      background: var(--accent);
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .contact-side h3 { margin-top: 0; margin-bottom: 10px; }
+    .contact-side p { color: var(--muted); margin-top: 0; }
+    .availability-list { padding-left: 18px; margin: 0; color: var(--muted); }
+    .availability-list li + li { margin-top: 8px; }
 
-        .footer { padding: 26px 0 40px; }
-        .footer .container { color: var(--muted); font-size: 0.94rem; border-top: 1px solid var(--line); padding-top: 22px; }
+    .footer { padding: 26px 0 40px; }
+    .footer .container { color: var(--muted); font-size: 0.94rem; border-top: 1px solid var(--line); padding-top: 22px; }
 
-        @media (max-width: 1024px) {
-          .hero-grid, .about-grid, .contact-wrap, .case-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 820px) {
-          .nav-toggle { display: inline-flex; }
-          .nav-links {
-            display: none; position: absolute; top: 72px; left: 16px; right: 16px; background: rgba(255,255,255,0.98);
-            border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 14px;
-            flex-direction: column; align-items: flex-start; gap: 14px;
-          }
-          .nav-links.open { display: flex; }
-          .hero-main { padding: 30px 24px; }
-          .hero-highlights, .mini-grid { grid-template-columns: 1fr; }
-          .section { padding: 72px 0; }
-        }
-        @media (max-width: 560px) {
-          .container, .nav-container, .hero-grid { width: min(var(--maxw), calc(100% - 20px)); }
-          .hero-actions { flex-direction: column; }
-          .btn { width: 100%; }
-        }
-      `}</style>
+    @media (max-width: 1024px) {
+      .hero-grid, .about-grid, .contact-wrap, .case-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 820px) {
+      .nav-toggle { display: inline-flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px; left: 16px; right: 16px;
+        background: rgba(255,255,255,0.98);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        padding: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .nav-links.open { display: flex; }
+      .hero-main { padding: 30px 24px; }
+      .hero-highlights, .mini-grid { grid-template-columns: 1fr; }
+      .section { padding: 72px 0; }
+    }
+    @media (max-width: 560px) {
+      .container, .nav-container, .hero-grid { width: min(var(--maxw), calc(100% - 20px)); }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
 
-      <nav className="navbar">
-        <div className="nav-container">
-          <a href="#home" className="nav-logo">Xinran Wang</a>
-          <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <a href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>
-              </li>
-            ))}
-          </ul>
-          <button className="nav-toggle" aria-label="Toggle navigation" onClick={() => setMenuOpen((v) => !v)}>
-            ☰
-          </button>
-        </div>
-      </nav>
+<body>
+  <div class="page-shell">
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#home" class="nav-logo">Xinran Wang</a>
 
-      <section id="home" className="hero">
-        <div>
-          <div className="hero-grid">
-            <div className="hero-main">
-              <p className="eyebrow">UX Research Portfolio</p>
-              <h1 className="hero-name">Xinran Wang</h1>
-              <h2 className="hero-title">UX Researcher · Mixed-Methods Researcher · Market &amp; Insights Researcher</h2>
-              <p className="hero-description">
-                I design mixed-methods research to understand users, evaluate experiences, and turn complex stakeholder questions into clear, actionable decisions. My work spans UX research, public opinion research, healthcare and community studies, and survey methodology, with experience in both qualitative and quantitative research design.
-              </p>
-              <div className="hero-actions">
-                <a href="#work" className="btn btn-primary">View Case Studies</a>
-                <a href="https://www.linkedin.com/in/xinran-ruby-wang/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">LinkedIn</a>
-              </div>
+        <ul id="navLinks" class="nav-links">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#work" class="nav-link">Case Studies</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
 
-              <div className="hero-highlights">
-                <div className="highlight-card">
-                  <strong>End-to-End Research</strong>
-                  <span>From framing ambiguous questions to design, execution, synthesis, and stakeholder delivery.</span>
-                </div>
-                <div className="highlight-card">
-                  <strong>Mixed Methods</strong>
-                  <span>Interviews, focus groups, surveys, evaluation design, and quantitative analysis.</span>
-                </div>
-                <div className="highlight-card">
-                  <strong>Real-World Impact</strong>
-                  <span>Research supporting campaigns, community programs, healthcare understanding, and strategy.</span>
-                </div>
-              </div>
+        <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </nav>
+
+    <section id="home" class="hero">
+      <div>
+        <div class="hero-grid">
+          <div class="hero-main">
+            <p class="eyebrow">UX Research Portfolio</p>
+            <h1 class="hero-name">Xinran Wang</h1>
+            <h2 class="hero-title">UX Researcher · Mixed-Methods Researcher · Market &amp; Insights Researcher</h2>
+            <p class="hero-description">
+              I design mixed-methods research to understand users, evaluate experiences, and turn complex stakeholder questions into clear, actionable decisions.
+              <!-- TODO: 把你原 React 文案里被截断的剩余部分补到这里 -->
+            </p>
+
+            <div class="hero-actions">
+              <a href="#work" class="btn btn-primary">View Case Studies</a>
+              <a href="https://www.linkedin.com/in/xinran-ruby-wang/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                LinkedIn
+              </a>
             </div>
 
-            <div className="hero-side">
-              <div className="headshot-card">
-                <div className="headshot-wrap">
-                  <img
-                    src="./images/headshot.jpg"
-                    alt="Portrait of Xinran Wang"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      target.style.display = "none";
-                    }}
-                  />
-                  <div className="headshot-fallback">XW</div>
-                </div>
-                <div className="headshot-note">
-                  For GitHub Pages, place this uploaded photo in an <strong>images</strong> folder and name it <strong>headshot.jpg</strong>.
-                </div>
+            <div class="hero-highlights">
+              <div class="highlight-card">
+                <strong>End-to-End Research</strong>
+                <span>From framing ambiguous questions to design, execution, synthesis, and stakeholder delivery.</span>
               </div>
-
-              <div className="summary-panel">
-                <small>What I do best</small>
-                <h3>Turning ambiguity into research plans that teams can actually use</h3>
-                <p>
-                  I enjoy structuring fuzzy product, policy, and stakeholder questions into feasible studies, then translating evidence into decision-ready recommendations.
-                </p>
+              <div class="highlight-card">
+                <strong>Mixed Methods</strong>
+                <span>Interviews, focus groups, surveys, evaluation design, and quantitative analysis.</span>
               </div>
-
-              <div className="mini-grid">
-                <div className="mini-item">
-                  <h4>Qualitative</h4>
-                  <p>IDI, focus groups, moderator guides, synthesis, stakeholder storytelling.</p>
-                </div>
-                <div className="mini-item">
-                  <h4>Quantitative</h4>
-                  <p>Survey design, regression, evaluation, weighting, simulation, data quality.</p>
-                </div>
-                <div className="mini-item">
-                  <h4>Cross-Cultural</h4>
-                  <p>Multilingual workflows and community-centered research across diverse audiences.</p>
-                </div>
-                <div className="mini-item">
-                  <h4>AI + Methods</h4>
-                  <p>Exploring LLM-supported interviewing and methodological innovation in research.</p>
-                </div>
+              <div class="highlight-card">
+                <strong>Real-World Impact</strong>
+                <span>Research supporting campaigns, community programs, healthcare understanding, and strategy.</span>
               </div>
             </div>
           </div>
 
-          <div className="hero-scroll">
-            <a href="#about" aria-label="Scroll down">↓</a>
-          </div>
-        </div>
-      </section>
+          <div class="hero-side">
+            <div class="headshot-card">
+              <div class="headshot-wrap">
+                <img id="headshot" src="./images/headshot.jpg" alt="Portrait of Xinran Wang" />
+                <div id="headshotFallback" class="headshot-fallback" aria-hidden="true">XW</div>
+              </div>
 
-      <section id="about" className="section about">
-        <div className="container">
-          <h2 className="section-title">About Me</h2>
-          <p className="section-intro">
-            I’m a mixed-methods researcher with 5 years of experience across user research, market and audience insights, public opinion research, and social-impact studies. I’m especially drawn to projects where rigorous research can shape better experiences, clearer decisions, and more thoughtful strategy.
-          </p>
-
-          <div className="about-grid">
-            <div className="about-card">
-              <p>
-                I have led and supported projects involving interviews, focus groups, surveys, questionnaire design, cross-cultural research, and quantitative analysis. I enjoy defining research questions, choosing methods that fit the problem, and translating findings into recommendations stakeholders can act on.
-              </p>
-              <p>
-                My work often lives in spaces where the questions are messy and the audiences are diverse: healthcare access, community needs, campaign evaluation, user perception, and emerging AI-supported research methods. I have also built and programmed online studies in Qualtrics and SurveyMonkey and used Python- and LLM-assisted workflows to speed up analysis and research preparation.
-              </p>
-
-              <div className="skills">
-                <h3>Methods &amp; Tools</h3>
-                <ul className="skills-list">
-                  <li>User Interviews</li>
-                  <li>Focus Groups</li>
-                  <li>Survey Design</li>
-                  <li>Questionnaire Development</li>
-                  <li>Mixed-Methods Research</li>
-                  <li>Cross-Cultural Research</li>
-                  <li>Cognitive Interviewing</li>
-                  <li>Concept / Message Testing</li>
-                  <li>Regression Analysis</li>
-                  <li>Quasi-Experimental Design</li>
-                  <li>Outcome Evaluation</li>
-                  <li>Qualtrics / SurveyMonkey</li>
-                  <li>R / Python / SQL / SAS</li>
-                  <li>Research Reporting</li>
-                </ul>
+              <div class="headshot-note">
+                For GitHub Pages, place this uploaded photo in an <strong>images</strong> folder and name it <strong>headshot.jpg</strong>.
               </div>
             </div>
 
-            <div className="about-side-card">
-              <h3>What I’m Looking For</h3>
+            <div class="summary-panel">
+              <small>What I do best</small>
+              <h3>Turning ambiguity into research plans that teams can actually use</h3>
               <p>
-                I’m especially interested in UX research and insight roles where I can combine user understanding, methodological rigor, and strategic thinking.
+                I enjoy structuring fuzzy product, policy, and stakeholder questions into feasible studies, then translating evidence into decision-ready recommendations.
               </p>
-              <ul className="focus-list">
-                <li>UX Research</li>
-                <li>User Insights</li>
-                <li>Audience &amp; Market Research</li>
-                <li>Research Strategy</li>
-                <li>Survey Methodology</li>
-                <li>Social-Impact Research</li>
+            </div>
+
+            <div class="mini-grid">
+              <div class="mini-item">
+                <h4>Qualitative</h4>
+                <p>IDI, focus groups, moderator guides, synthesis, stakeholder storytelling.</p>
+              </div>
+              <div class="mini-item">
+                <h4>Quantitative</h4>
+                <p>Survey design, regression, evaluation, weighting, simulation, data quality.</p>
+              </div>
+              <div class="mini-item">
+                <h4>Cross-Cultural</h4>
+                <p>Multilingual workflows and community-centered research across diverse audiences.</p>
+              </div>
+              <div class="mini-item">
+                <h4>AI + Methods</h4>
+                <p>Exploring LLM-supported interviewing and methodological innovation in research.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-scroll">
+          <a href="#about" aria-label="Scroll down">↓</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-intro">
+          I’m a mixed-methods researcher with 5 years of experience across user research, market and audience insights, public opinion research, and social-impact studies.
+          <!-- TODO: 补齐被截断文案 -->
+        </p>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <p>
+              I have led and supported projects involving interviews, focus groups, surveys, questionnaire design, cross-cultural research, and quantitative analysis.
+              <!-- TODO: 补齐被截断文案 -->
+            </p>
+            <p>
+              My work often lives in spaces where the questions are messy and the audiences are diverse: healthcare access, community needs, campaign evaluation, user perception, and emerging AI-supported workflows.
+              <!-- TODO: 如需更长文案可替换 -->
+            </p>
+
+            <div class="skills">
+              <h3>Methods &amp; Tools</h3>
+              <ul class="skills-list">
+                <li>User Interviews</li>
+                <li>Focus Groups</li>
+                <li>Survey Design</li>
+                <li>Questionnaire Development</li>
+                <li>Mixed-Methods Research</li>
+                <li>Cross-Cultural Research</li>
+                <li>Cognitive Interviewing</li>
+                <li>Concept / Message Testing</li>
+                <li>Regression Analysis</li>
+                <li>Quasi-Experimental Design</li>
+                <li>Outcome Evaluation</li>
+                <li>Qualtrics / SurveyMonkey</li>
+                <li>R / Python / SQL / SAS</li>
+                <li>Research Reporting</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="about-side-card">
+            <h3>What I’m Looking For</h3>
+            <p>
+              I’m especially interested in UX research and insight roles where I can combine user understanding, methodological rigor, and strategic thinking.
+            </p>
+            <ul class="focus-list">
+              <li>UX Research</li>
+              <li>User Insights</li>
+              <li>Audience &amp; Market Research</li>
+              <li>Research Strategy</li>
+              <li>Survey Methodology</li>
+              <li>Social-Impact Research</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section work">
+      <div class="container">
+        <h2 class="section-title">Selected Case Studies</h2>
+        <p class="section-intro">
+          These projects show how I approach ambiguity, method choice, synthesis, and stakeholder communication across applied research settings.
+          <!-- TODO: 补齐被截断文案 -->
+        </p>
+
+        <div class="case-grid">
+          <!-- Case 1 -->
+          <article class="case-card">
+            <div class="case-top"><span class="case-label">Evaluation Research</span></div>
+            <h3 class="case-title">Powered by School Food Professionals</h3>
+            <p class="case-summary">
+              Evaluated how campaign messages and creative treatments shaped perceptions of school food professionals through quasi-experimental thinking, grouped comparisons, regression-based interpretation, and outcome framing.
+            </p>
+
+            <div class="case-block">
+              <h4>Problem</h4>
+              <p>How do we assess whether campaign messaging meaningfully shifts perceptions of a professional group, beyond general impressions or anecdotal feedback?</p>
+            </div>
+            <div class="case-block">
+              <h4>My Contribution</h4>
+              <p>Supported the evaluation logic behind structured message testing and comparative analysis, helping translate campaign outcomes into stakeholder-relevant findings and recommendations.</p>
+            </div>
+            <div class="case-block">
+              <h4>Why It Matters</h4>
+              <p>This project demonstrates my ability to connect intervention design with rigorous evaluation and practical reporting for external stakeholders.</p>
+            </div>
+
+            <div class="tags">
+              <span class="tag">Quasi-Experimental Design</span>
+              <span class="tag">Regression</span>
+              <span class="tag">Campaign Impact</span>
+              <span class="tag">Stakeholder Reporting</span>
+            </div>
+
+            <div class="case-links">
+              <a class="case-link" href="https://www.chefannfoundation.org/blog/why-and-how-we-helped-california-build-a-campaign-to-shift-perceptions-about-school-food-professionals/" target="_blank" rel="noopener noreferrer">🔗 Project page</a>
+              <a class="case-link" href="https://storage.googleapis.com/chefann-prod-v1/downloads/Elevating-the-Perceptions-of-School-Food-Professionals.pdf" target="_blank" rel="noopener noreferrer">📄 Report PDF</a>
+            </div>
+          </article>
+
+          <!-- Case 2 -->
+          <article class="case-card">
+            <div class="case-top"><span class="case-label">Social Impact Research</span></div>
+            <h3 class="case-title">LA84 Play Equity Research</h3>
+            <p class="case-summary">
+              Supported research design and insight development for a play equity study examining disparities in youth access to sports and recreation opportunities.
+            </p>
+
+            <div class="case-block">
+              <h4>Problem</h4>
+              <p>How do we turn a broad concern about inequitable access into a research framework that stakeholders can understand, communicate, and act on?</p>
+            </div>
+            <div class="case-block">
+              <h4>My Contribution</h4>
+              <p>Helped structure the research approach, connect stakeholder goals to evidence gathering, and frame insights in a way that supported advocacy and funding conversations.</p>
+            </div>
+            <div class="case-block">
+              <h4>Why It Matters</h4>
+              <p>This work reflects my ability to move from vague problem framing to applied insight generation in mission-driven settings.</p>
+            </div>
+
+            <div class="tags">
+              <span class="tag">Equity Research</span>
+              <span class="tag">Applied Insights</span>
+              <span class="tag">Stakeholder Communication</span>
+              <span class="tag">Program Framing</span>
+            </div>
+
+            <div class="case-links">
+              <a class="case-link" href="https://www.la84.org/" target="_blank" rel="noopener noreferrer">🔗 LA84 Foundation</a>
+              <a class="case-link" href="https://la84.s3.amazonaws.com/report/2024_Play_Equity_Report.pdf" target="_blank" rel="noopener noreferrer">📄 Report PDF</a>
+            </div>
+          </article>
+
+          <!-- Case 3 -->
+          <article class="case-card">
+            <div class="case-top"><span class="case-label">Qualitative Health Research</span></div>
+            <h3 class="case-title">Listening to Californians with Complex Needs</h3>
+            <p class="case-summary">
+              Contributed to qualitative research exploring the lived experiences of Californians with complex health and social needs, including older adults, people with disabilities, people with chronic conditions, and caregivers.
+            </p>
+
+            <div class="case-block">
+              <h4>Problem</h4>
+              <p>How do we make sense of multiple stakeholder perspectives when experiences, needs, and priorities are complex and sometimes in tension?</p>
+            </div>
+            <div class="case-block">
+              <h4>My Contribution</h4>
+              <p>Supported qualitative synthesis across stakeholder groups and helped translate nuanced, sometimes conflicting experiences into clear insight themes for external audiences.</p>
+            </div>
+            <div class="case-block">
+              <h4>Why It Matters</h4>
+              <p>This project shows my comfort with ambiguity, sensitive topics, and layered qualitative interpretation.</p>
+            </div>
+
+            <div class="tags">
+              <span class="tag">Qualitative Research</span>
+              <span class="tag">Healthcare</span>
+              <span class="tag">Insight Synthesis</span>
+              <span class="tag">Community Research</span>
+            </div>
+
+            <div class="case-links">
+              <a class="case-link" href="https://www.chcf.org/resource/listening-californians-complex-needs/" target="_blank" rel="noopener noreferrer">🔗 Project overview</a>
+              <a class="case-link" href="https://www.chcf.org/resource/listening-to-californians-with-complex-needs-challenges-living-independently/" target="_blank" rel="noopener noreferrer">🔗 Example article</a>
+            </div>
+          </article>
+
+          <!-- Case 4 -->
+          <article class="case-card">
+            <div class="case-top"><span class="case-label">AI + Research Methods</span></div>
+            <h3 class="case-title">AI vs. Human Cognitive Interviewing Exploration</h3>
+            <p class="case-summary">
+              Explored how AI-conducted cognitive interviews compare with human interviews, focusing on response quality, probing depth, and evaluation frameworks grounded in cognitive interviewing methodology.
+            </p>
+
+            <div class="case-block">
+              <h4>Problem</h4>
+              <p>Can AI simulate or support cognitive interviewing in meaningful ways, and how should we evaluate what it does well or poorly compared with human interviewers?</p>
+            </div>
+            <div class="case-block">
+              <h4>My Contribution</h4>
+              <p>Applied methodological frameworks to compare AI-generated interviewing against human examples, with attention to probe quality, interpretive depth, and research validity.</p>
+            </div>
+            <div class="case-block">
+              <h4>Why It Matters</h4>
+              <p>This project represents my interest in the intersection of UX research, survey methodology, and emerging AI-enabled workflows.</p>
+            </div>
+
+            <div class="tags">
+              <span class="tag">AI Research</span>
+              <span class="tag">Cognitive Interviewing</span>
+              <span class="tag">Method Evaluation</span>
+              <span class="tag">Survey Research</span>
+            </div>
+
+            <div class="case-links">
+              <a class="case-link" href="https://electionstudies.org/data-center/2006-pilot-study/" target="_blank" rel="noopener noreferrer">🔗 ANES 2006 Pilot Study</a>
+              <a class="case-link" href="https://electionstudies.org/wp-content/uploads/2022/03/anes-pilot-2006-cognitive-transcripts.pdf" target="_blank" rel="noopener noreferrer">📄 Transcripts</a>
+            </div>
+          </article>
+
+          <!-- Case 5 -->
+          <article class="case-card">
+            <div class="case-top"><span class="case-label">Survey Methodology</span></div>
+            <h3 class="case-title">Matrix Sampling Simulation Study</h3>
+            <p class="case-summary">
+              Analyzed the application of matrix sampling in large-scale surveys by building simulation-based comparisons across questionnaire allocation and analysis strategies.
+            </p>
+
+            <div class="case-block">
+              <h4>Problem</h4>
+              <p>How can we reduce respondent burden while preserving acceptable levels of estimation quality and minimizing bias?</p>
+            </div>
+            <div class="case-block">
+              <h4>My Contribution</h4>
+              <p>Contributed to simulation design and comparative evaluation of design and analysis strategies, helping surface trade-offs among burden, precision, and data quality.</p>
+            </div>
+            <div class="case-block">
+              <h4>Why It Matters</h4>
+              <p>This project reflects my technical grounding in survey methods and my ability to explain methodological trade-offs to non-specialist audiences.</p>
+            </div>
+
+            <div class="tags">
+              <span class="tag">Simulation</span>
+              <span class="tag">Matrix Sampling</span>
+              <span class="tag">Data Quality</span>
+              <span class="tag">Survey Methods</span>
+            </div>
+
+            <div class="case-links">
+              <a class="case-link" href="#contact">🔗 Ask for slides or details</a>
+            </div>
+          </article>
+
+          <!-- Case 6 -->
+          <article class="case-card">
+            <div class="case-top"><span class="case-label">Cross-Cultural Research</span></div>
+            <h3 class="case-title">Cross-Cultural &amp; Multilingual Public Opinion Research</h3>
+            <p class="case-summary">
+              Led and supported research across multicultural audiences, including multilingual workflows involving Mandarin, Spanish, and Vietnamese materials.
+            </p>
+
+            <div class="case-block">
+              <h4>Problem</h4>
+              <p>How do we design research that remains coherent, culturally aware, and operationally feasible across languages, communities, and stakeholder needs?</p>
+            </div>
+            <div class="case-block">
+              <h4>My Contribution</h4>
+              <p>Worked across questionnaire development, translation coordination, sampling inputs, and reporting to support studies involving diverse communities and multilingual materials.</p>
+            </div>
+            <div class="case-block">
+              <h4>Why It Matters</h4>
+              <p>This body of work highlights my ability to operate in complex, cross-cultural research environments where nuance and execution both matter.</p>
+            </div>
+
+            <div class="tags">
+              <span class="tag">Multilingual Research</span>
+              <span class="tag">Questionnaire Design</span>
+              <span class="tag">Public Opinion</span>
+              <span class="tag">Cross-Cultural</span>
+            </div>
+
+            <div class="case-links">
+              <a class="case-link" href="#contact">🔗 Ask for selected examples</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section experience">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <p class="section-intro">
+          My background combines applied client work, community-centered research, and technical training in survey methods and quantitative analysis.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Polling &amp; Public Opinion Analyst</h3>
+                <span class="timeline-company">EVITARUS</span>
+                <span class="timeline-date">2024 – Present</span>
+              </div>
+              <ul class="timeline-details">
+                <li><!-- TODO: 补齐 bullets（你原本被截断了） -->Led and supported 30+ mixed-methods research projects...</li>
+                <li><!-- TODO -->Designed and executed surveys, in-depth interviews...</li>
+                <li><!-- TODO -->Built and programmed 50+ online studies...</li>
+                <li><!-- TODO -->Synthesized findings into toplines, white papers...</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Graduate Student Researcher / Survey Research Analyst</h3>
+                <span class="timeline-company">University of Michigan</span>
+                <span class="timeline-date">2022 – 2024</span>
+              </div>
+              <ul class="timeline-details">
+                <li><!-- TODO -->Managed monthly processing and analysis of large-scale consumer survey data...</li>
+                <li>Applied raking, predictive mean matching, and multiple imputation to address missing data and sample bias, improving representativeness and stability of survey estimates.</li>
+                <li><!-- TODO -->Conducted simulation research on matrix sampling designs...</li>
+                <li><!-- TODO -->Analyzed consumer sentiment, inflation expectations...</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Researcher Across Nonprofit, Foundation, and Applied Research Projects</h3>
+                <span class="timeline-company">Independent / Collaborative Research Experience</span>
+                <span class="timeline-date">Selected Work</span>
+              </div>
+              <ul class="timeline-details">
+                <li>Worked on projects for mission-driven organisations and foundations, helping translate broad stakeholder goals into researchable questions and feasible study designs.</li>
+                <li>Applied comparative analysis, quasi-experimental thinking, and outcome interpretation to support evidence-based recommendations.</li>
+                <li>Delivered research outputs that helped clarify user and community needs, communicate inequities, and support funding or program positioning.</li>
               </ul>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="work" className="section work">
-        <div className="container">
-          <h2 className="section-title">Selected Case Studies</h2>
-          <p className="section-intro">
-            These projects show how I approach ambiguity, method choice, synthesis, and stakeholder communication across applied research settings. They are written in a case-study style to highlight context, my role, and the type of impact the work supported.
-          </p>
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
 
-          <div className="case-grid">
-            {caseStudies.map((study) => (
-              <article className="case-card" key={study.title}>
-                <div className="case-top">
-                  <span className="case-label">{study.label}</span>
-                </div>
-                <h3 className="case-title">{study.title}</h3>
-                <p className="case-summary">{study.summary}</p>
-                <div className="case-block">
-                  <h4>Problem</h4>
-                  <p>{study.problem}</p>
-                </div>
-                <div className="case-block">
-                  <h4>My Contribution</h4>
-                  <p>{study.contribution}</p>
-                </div>
-                <div className="case-block">
-                  <h4>Why It Matters</h4>
-                  <p>{study.impact}</p>
-                </div>
-                <div className="tags">
-                  {study.tags.map((tag) => (
-                    <span className="tag" key={tag}>{tag}</span>
-                  ))}
-                </div>
-                <div className="case-links">
-                  {study.links.map((link) => (
-                    <a
-                      key={link.text}
-                      href={link.href}
-                      className="case-link"
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    >
-                      {link.text}
-                    </a>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+        <div class="contact-wrap">
+          <div class="contact-card">
+            <p class="contact-description">
+              I’m open to opportunities in UX research, market and audience insights, research strategy, and survey-focused roles.
+              <!-- TODO: 补齐被截断文案 -->
+            </p>
 
-      <section id="experience" className="section experience">
-        <div className="container">
-          <h2 className="section-title">Experience</h2>
-          <p className="section-intro">
-            My background combines applied client work, community-centered research, and technical training in survey methods and quantitative analysis.
-          </p>
+            <div class="contact-links">
+              <a href="mailto:xinxinran.wang@outlook.com" class="contact-item">
+                <span class="contact-icon">✉</span>
+                <span>xinxinran.wang@outlook.com</span>
+              </a>
 
-          <div className="timeline">
-            {experience.map((item) => (
-              <div className="timeline-item" key={item.role}>
-                <div className="timeline-marker" />
-                <div className="timeline-content">
-                  <div className="timeline-header">
-                    <h3>{item.role}</h3>
-                    <span className="timeline-company">{item.company}</span>
-                    <span className="timeline-date">{item.date}</span>
-                  </div>
-                  <ul className="timeline-details">
-                    {item.bullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <a href="https://github.com/Xinranwxrtzxy" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <span class="contact-icon">🔗</span>
+                <span>GitHub</span>
+              </a>
 
-      <section id="contact" className="section contact">
-        <div className="container">
-          <h2 className="section-title">Get In Touch</h2>
-          <div className="contact-wrap">
-            <div className="contact-card">
-              <p className="contact-description">
-                I’m open to opportunities in UX research, market and audience insights, research strategy, and survey-focused roles. Feel free to reach out for collaboration, portfolio conversations, or professional connections.
-              </p>
-              <div className="contact-links">
-                <a href="mailto:xinxinran.wang@outlook.com" className="contact-item">
-                  <span className="contact-icon">✉</span>
-                  <span>xinxinran.wang@outlook.com</span>
-                </a>
-                <a href="https://github.com/Xinranwxrtzxy" target="_blank" rel="noopener noreferrer" className="contact-item">
-                  <span className="contact-icon">🔗</span>
-                  <span>GitHub</span>
-                </a>
-                <a href="https://www.linkedin.com/in/xinran-ruby-wang/" target="_blank" rel="noopener noreferrer" className="contact-item">
-                  <span className="contact-icon">👥</span>
-                  <span>LinkedIn</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="contact-side">
-              <h3>Best Fit Roles</h3>
-              <p>
-                I’m especially interested in roles where I can combine user understanding, rigorous research design, and strategic thinking.
-              </p>
-              <ul className="availability-list">
-                <li>UX Research / User Research</li>
-                <li>Market &amp; Consumer Insights</li>
-                <li>Research Strategy / Applied Insights</li>
-                <li>Survey Research / Methodology</li>
-                <li>Social-Impact and Community-Centered Research</li>
-              </ul>
+              <a href="https://www.linkedin.com/in/xinran-ruby-wang/" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <span class="contact-icon">👥</span>
+                <span>LinkedIn</span>
+              </a>
             </div>
           </div>
-        </div>
-      </section>
 
-      <footer className="footer">
-        <div className="container">
-          <p>© 2026 Xinran Wang. Built to showcase UX research, mixed-methods work, and selected case studies.</p>
+          <div class="contact-side">
+            <h3>Best Fit Roles</h3>
+            <p>I’m especially interested in roles where I can combine user understanding, rigorous research design, and strategic thinking.</p>
+            <ul class="availability-list">
+              <li>UX Research / User Research</li>
+              <li>Market &amp; Consumer Insights</li>
+              <li>Research Strategy / Applied Insights</li>
+              <li>Survey Research / Methodology</li>
+              <li>Social-Impact and Community-Centered Research</li>
+            </ul>
+          </div>
         </div>
-      </footer>
-    </div>
-  );
-}
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 Xinran Wang. Built to showcase UX research, mixed-methods work, and selected case studies.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile nav: simplest toggle + close on link click
+    (function () {
+      const navToggle = document.getElementById("navToggle");
+      const navLinks = document.getElementById("navLinks");
+      const navLinkItems = document.querySelectorAll(".nav-link");
+
+      function setOpen(open) {
+        navLinks.classList.toggle("open", open);
+        navToggle.setAttribute("aria-expanded", String(open));
+      }
+
+      navToggle.addEventListener("click", function () {
+        const isOpen = navLinks.classList.contains("open");
+        setOpen(!isOpen);
+      });
+
+      navLinkItems.forEach((a) => {
+        a.addEventListener("click", function () {
+          setOpen(false);
+        });
+      });
+
+      // Headshot fallback: if image fails, show initials
+      const img = document.getElementById("headshot");
+      const fallback = document.getElementById("headshotFallback");
+
+      function showFallback() {
+        if (img) img.style.display = "none";
+        if (fallback) fallback.style.display = "grid";
+      }
+
+      if (img) {
+        fallback.style.display = "none";
+        img.addEventListener("error", showFallback);
+        // If cached error state / missing file
+        if (img.complete && img.naturalWidth === 0) showFallback();
+      }
+    })();
+  </script>
+</body>
+</html>
